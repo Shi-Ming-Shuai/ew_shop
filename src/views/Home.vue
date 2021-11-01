@@ -1,18 +1,30 @@
 <template>
-  <div class="home">
-    <img alt="Vue logo" src="../assets/logo.png">
-    <HelloWorld msg="Welcome to Your Vue.js App"/>
-  </div>
+  <div class="Home"></div>
 </template>
 
 <script>
-// @ is an alias to /src
-import HelloWorld from '@/components/HelloWorld.vue'
-
+import { reactive, toRefs, onMounted } from 'vue'
+// 请求
+import { getHomeData } from '@/network/home'
 export default {
   name: 'Home',
-  components: {
-    HelloWorld
+  props: {},
+  components: {},
+  setup() {
+    onMounted(() => {
+      getHome()
+    })
+    const state = reactive({})
+    // 请求
+    async function getHome() {
+      const res = await getHomeData()
+      console.log(res)
+    }
+    return {
+      ...toRefs(state)
+    }
   }
 }
 </script>
+
+<style lang="less"></style>
