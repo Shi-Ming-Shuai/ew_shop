@@ -4,8 +4,25 @@ const routes = [
   {
     path: '/',
     name: 'Home',
-    component: () => import(/* webpackChunkName: "about" */ '@/views/Home')
+    component: () => import(/* webpackChunkName: "about" */ '@/views/home/Home')
+  }, {
+    path: '/category',
+    name: 'Category',
+    component: () => import('@/views/category/Category')
+  }, {
+    path: '/cart',
+    name: 'Cart',
+    component: () => import('@/views/cart/Cart')
+  }, {
+    path: '/profile',
+    name: 'Profile',
+    component: () => import('@/views/profile/Profile')
+  }, {
+    path: '/detaile',
+    name: 'Detaile',
+    component: () => import('@/components/content/detaile/Detaile')
   }
+
 ]
 
 const router = createRouter({
