@@ -1,7 +1,14 @@
 <template>
   <div>
     <!-- 一级路由出口 -->
-    <router-view />
+    <!-- transition而keep-alive现在必须使用内部的RouterView通过v-slotAPI： -->
+    <router-view v-slot="{ Component }">
+      <transition>
+        <keep-alive>
+          <component :is="Component" />
+        </keep-alive>
+      </transition>
+    </router-view>
     <!-- 底部标签栏 -->
     <TabBar />
   </div>

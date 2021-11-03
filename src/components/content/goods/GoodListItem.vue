@@ -1,7 +1,7 @@
 <template>
   <div class="GoodListItem">
     <div class="cover">
-      <img :src="goodsInfo.cover_url" alt="" />
+      <img v-lazy="goodsInfo.cover_url" alt="" />
     </div>
     <div class="goods-info">
       <p class="title">{{ goodsInfo.title }}</p>
@@ -41,14 +41,14 @@ export default {
   img {
     width: 100%;
   }
-  .count{
+  .count {
     margin-top: 5px;
-    span{
+    span {
       margin-left: 2px;
     }
   }
-  .price{
+  .price {
     margin-right: 8px;
   }
-  }
+}
 </style>

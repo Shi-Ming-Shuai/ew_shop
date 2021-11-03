@@ -6,7 +6,7 @@
       :key="item.id"
       @click="goDetaile(item.id)"
     >
-      <img :src="item.cover_url" alt="" />
+      <img v-lazy="item.cover_url" alt="" />
       <p>{{ item.title }}</p>
     </div>
   </div>

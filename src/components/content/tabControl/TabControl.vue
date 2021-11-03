@@ -61,7 +61,7 @@ export default {
         // 将商品数组存入商品列表中
         state.goodsLists[index] = data
       } else {
-        state.goodsLists[index].push(...data)
+        state.goodsLists[index] && state.goodsLists[index].push(...data)
       }
     }
     // 切换标签
