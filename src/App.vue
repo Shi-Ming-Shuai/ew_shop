@@ -4,7 +4,7 @@
     <!-- transition而keep-alive现在必须使用内部的RouterView通过v-slotAPI： -->
     <router-view v-slot="{ Component }">
       <transition>
-        <keep-alive>
+        <keep-alive :exclude="['Detaile']">
           <component :is="Component" />
         </keep-alive>
       </transition>
@@ -27,6 +27,7 @@ export default {
 // 全局样式
 @import '~@/assets/css/global.css';
 #app {
+  padding-top: 46px;
   padding-bottom: 50px;
 }
 </style>

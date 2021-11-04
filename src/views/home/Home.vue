@@ -92,6 +92,9 @@ export default {
 </script>
 
 <style lang="less">
+.van-sticky {
+  top: 46px !important;
+}
 .my-swipe .van-swipe-item {
   height: 150px;
   img {

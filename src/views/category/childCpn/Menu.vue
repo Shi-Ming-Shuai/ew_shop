@@ -14,6 +14,7 @@
             v-for="item2 in item.children"
             :key="item2.id"
             :title="item2.name"
+            @click="menuClick"
           />
         </van-sidebar>
       </van-collapse-item>
@@ -34,11 +35,20 @@ export default {
     }
   },
   components: {},
-  setup() {
+  setup(props, { emit }) {
     // 一级菜单  二级菜单
     const oneIndex = ref(0)
     const twoIndex = ref(0)
-    return { oneIndex, twoIndex }
+    let categoryId = 0
+    // 分类被点击 发送对应下标给父
+    function menuClick(i) {
+      twoIndex.value = i
+      const oneI = oneIndex.value
+      const twoI = twoIndex.value
+      categoryId = props.categoryList[oneI].children[twoI].id
+      emit('menuClick', categoryId)
+    }
+    return { oneIndex, twoIndex, menuClick }
   }
 }
 </script>
