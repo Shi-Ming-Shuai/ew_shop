@@ -3,7 +3,7 @@
     <!-- 回到顶部 -->
     <BackTop v-show="isShowBackTop" @backTop="backTop" />
     <!-- 公共导航栏 -->
-    <van-nav-bar title="图书兄弟" left-arrow @click-left="$router.back()" />
+    <van-nav-bar title="图书兄弟" />
     <!-- 轮播图 -->
     <Banner :bannerList="bannerList" />
     <!-- 推荐商品 -->
@@ -50,7 +50,6 @@ export default {
     const isShowBackTop = ref(false)
     // 业务逻辑
     function backTop() {
-      console.log('回到顶部')
       const timer = setInterval(() => {
         const ispeed = Math.floor(-currentScrollTop.value / 5)
         document.documentElement.scrollTop = document.body.scrollTop =
@@ -80,7 +79,6 @@ export default {
       // 轮播图
       state.bannerList = res.slides
       state.reGoodsList = res.goods.data
-      console.log(res)
     }
     return {
       ...toRefs(state),

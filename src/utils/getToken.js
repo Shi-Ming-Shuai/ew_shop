@@ -1,13 +1,9 @@
 // 获取用户token   用户设置 axios 请求头携带
 
-import store from '@/store'
+import { getItem } from '@/utils/storage'
 
 export const getToken = () => {
-  // 判断用户是否登录 并且 token存在
-  if (store.state.user && store.state.user.token) {
-    // 返回token
-    return store.state.user.token
-  } else {
-    return null
-  }
+  const token = getItem('token')
+  // 判断token 是否存在
+  return token
 }

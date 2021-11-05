@@ -2,16 +2,28 @@
   <div class="TabControl">
     <van-tabs v-model:active="active">
       <van-tab title="概述">
-        <div class="desc"></div>
+        <div class="desc" v-html="details"></div>
       </van-tab>
-      <van-tab title="热评">内容 2</van-tab>
-      <van-tab title="相关图书">内容 3</van-tab>
+      <van-tab title="热评">
+        <van-cell-group title="商品评论">
+          <van-cell
+            v-for="(item, i) in comments"
+            :key="i"
+            :value="item.content"
+          />
+        </van-cell-group>
+      </van-tab>
+      <van-tab title="相关图书">
+        <GoodsList :goodsLists="likeGoods" />
+      </van-tab>
     </van-tabs>
   </div>
 </template>
 
 <script>
 import { ref } from 'vue'
+// 组件
+import GoodsList from '@/components/content/goods/GoodsList'
 export default {
   name: 'TabControl',
   props: {
@@ -35,7 +47,7 @@ export default {
       }
     }
   },
-  components: {},
+  components: { GoodsList },
   setup() {
     const active = ref(0)
     return { active }
@@ -43,4 +55,12 @@ export default {
 }
 </script>
 
-<style scoped lang="less"></style>
+<style scoped lang="less">
+/deep/.desc {
+  img {
+    max-width: 100% !important;
+    // img标签实现background-size:cover（图片拉伸、缩放）等效果
+    object-fit: cover;
+  }
+}
+</style>

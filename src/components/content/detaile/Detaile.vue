@@ -65,6 +65,9 @@ export default {
 </script>
 
 <style scoped lang="less">
+.Detaile {
+  background: #fff;
+}
 .van-card:not(:first-child) {
   margin-top: 0;
 }

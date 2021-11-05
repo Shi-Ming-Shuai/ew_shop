@@ -7,7 +7,6 @@
       :goodsInfo="item"
       @click="goDetaile(item.id)"
     />
-    <!-- <p v-for="(item, i) in 50" :key="i">adawd</p> -->
   </div>
 </template>
 
@@ -58,7 +57,6 @@ export default {
   .item {
     margin-top: 10px;
     width: 180px;
-    border: 1px solid #000;
     // &:last-child {
     //   /* 让最后一个元素的右边距自动适应，从而实现左对齐的效果。*/
     //   margin-right: auto;
