@@ -52,6 +52,7 @@
 
 <script>
 import { Toast } from 'vant'
+import { useStore } from 'vuex'
 import { useRouter } from 'vue-router'
 import { reactive, toRefs } from 'vue'
 // 请求
@@ -63,6 +64,7 @@ export default {
   props: {},
   components: {},
   setup() {
+    const store = useStore()
     const router = useRouter()
     // 邮箱正则验证
     const emailReg =
@@ -83,6 +85,7 @@ export default {
         // 将token保存到本地
         Toast.success('登录成功')
         setItem('token', res.access_token)
+        store.commit('changeLogin', true)
         const timer = setTimeout(() => {
           router.back()
           clearTimeout(timer)

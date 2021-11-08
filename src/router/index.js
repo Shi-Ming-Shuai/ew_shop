@@ -1,4 +1,7 @@
 import { createRouter, createWebHistory } from 'vue-router'
+import store from '../store'
+import { Toast } from 'vant'
+
 const routes = [
   {
     path: '/',
@@ -42,6 +45,18 @@ const routes = [
 const router = createRouter({
   history: createWebHistory(process.env.BASE_URL),
   routes
+})
+
+// 导航守卫 权限验证
+console.log(store)
+router.beforeEach((to, from, next) => {
+  // 进入页面判断是否需要登录
+  const isRequiresAuth = to.meta.requiresAuth
+  if (!store.state.isLogin && isRequiresAuth) {
+    Toast('请先登录')
+    next('/login')
+  }
+  next()
 })
 
 export default router

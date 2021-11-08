@@ -10,24 +10,24 @@
 </template>
 
 <script>
+import { useStore } from 'vuex'
 import { reactive, toRefs } from 'vue'
 import { removeItem } from '@/utils/storage'
-
-import { getToken } from '@/utils/getToken'
 
 export default {
   name: 'Profile',
   props: {},
   components: {},
   setup() {
-    const a = getToken()
-    console.log(a)
+    const store = useStore()
+
     const state = reactive({})
     // 业务逻辑
     // 退出登录
     const loginOut = () => {
       // 移除token
       removeItem('token')
+      store.commit('changeLogin', false)
     }
     return {
       ...toRefs(state),

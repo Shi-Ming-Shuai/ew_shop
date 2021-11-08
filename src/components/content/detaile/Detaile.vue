@@ -14,7 +14,9 @@
         <van-tag plain type="danger">推荐</van-tag>
       </template>
       <template #footer>
-        <van-button class="btn-shopping" size="small">加入购物车</van-button>
+        <van-button class="btn-shopping" size="small" @click="addCardClick"
+          >加入购物车</van-button
+        >
         <van-button class="btn-buy" size="small">立即购买</van-button>
       </template>
     </van-card>
@@ -28,10 +30,13 @@
 </template>
 
 <script>
+import { Toast } from 'vant'
 import { useRoute } from 'vue-router'
 import { reactive, toRefs, onMounted } from 'vue'
 // 请求
 import { getDetaile } from '@/network/detaile'
+import { addCart } from '@/network/cart'
+
 // 组件
 import TabControl from './childCpn/TabControl'
 export default {
@@ -57,8 +62,19 @@ export default {
       state.likeGoods = res.like_goods
       console.log(res)
     }
+    // 业务逻辑
+    // 加入购物车
+    const addCardClick = async () => {
+      try {
+        await addCart(goodsId, 1)
+        Toast.success('添加成功')
+      } catch (e) {
+        Toast('添加失败,请重试')
+      }
+    }
     return {
-      ...toRefs(state)
+      ...toRefs(state),
+      addCardClick
     }
   }
 }

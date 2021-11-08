@@ -1,5 +1,5 @@
 import axios from 'axios'
-
+import { getToken } from './getToken'
 // 处理后端返回数据超出 JS 安全整数范围问题
 import jsonBig from 'json-bigint'
 
@@ -36,11 +36,11 @@ export function request(config) {
   // 1.请求拦截
   instance.interceptors.request.use(config => {
     // 判断token是否存在 如果存在 携带在请求头 Authorization
-    // if (getToken()) {
-    //   config.headers.Authorization = `Bearer ${getToken()}`
-    // } else {
-    //   console.log('token不存在,请求头没有添加 Authorization 字段')
-    // }
+    if (getToken()) {
+      config.headers.Authorization = `Bearer ${getToken()}`
+    } else {
+      console.log('token不存在,请求头没有添加 Authorization 字段')
+    }
     return config
   }, error => {
     console.log('请求拦截错误' + error)
