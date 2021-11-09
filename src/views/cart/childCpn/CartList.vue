@@ -30,14 +30,21 @@
       </van-card>
     </van-checkbox-group>
     <!-- 提交订单 -->
-    <van-submit-bar :price="3050" button-text="提交订单" @submit="onSubmit">
+    <van-submit-bar
+      :loading="submitLoading"
+      :price="goodsAddPrice * 100"
+      button-text="提交订单"
+      @submit="onSubmit"
+    >
       <van-checkbox v-model="checkedAll" @click="checkAll">全选</van-checkbox>
     </van-submit-bar>
   </div>
 </template>
 
 <script>
-import { ref, onMounted, reactive, toRefs } from 'vue'
+import { Toast } from 'vant'
+import { useRouter } from 'vue-router'
+import { ref, computed, onMounted, reactive, toRefs } from 'vue'
 // 请求
 import { chengChecked, cartList } from '@/network/cart'
 export default {
@@ -45,6 +52,7 @@ export default {
   props: {},
   components: {},
   setup() {
+    const router = useRouter()
     // 商品复选框
     const checkedAll = ref(false)
     const checkboxGroup = ref(null)
@@ -56,12 +64,25 @@ export default {
     onMounted(() => {
       cartListData()
     })
-
+    // 计算属性
+    // 勾选的商品总价
+    const goodsAddPrice = computed(() => {
+      let result = 0
+      // 将勾选的商品信息过滤出 然后计算总和
+      state.goodsList
+        .filter((item) => {
+          return state.checked.includes(item.goods_id)
+        })
+        .forEach((item) => {
+          console.log(result)
+          result += parseFloat(item.goods.price) * parseInt(item.num)
+        })
+      return result
+    })
     // 请求
     const cartListData = async () => {
       const res = await cartList()
       state.goodsList = res.data
-      console.log(res)
       // 将选中的商品 筛选出来
       state.checked = res.data
         .filter((item) => {
@@ -77,14 +98,22 @@ export default {
       } else {
         checkedAll.value = false
       }
-      console.log(checkedAll.value)
       await chengChecked(newAry)
-      console.log(newAry)
     }
     // 业务逻辑
+    const submitLoading = ref(false)
     // 提交订单
     const onSubmit = () => {
-      console.log('提交')
+      submitLoading.value = true
+      // 如果未勾选商品 提示用户
+      if (state.checked.length === 0) {
+        Toast.fail('还未勾选要结算的商品')
+      } else {
+        router.push('/createorder')
+      }
+      setTimeout(() => {
+        submitLoading.value = false
+      }, 1000)
     }
     // 全选
     const checkAll = () => {
@@ -94,7 +123,9 @@ export default {
     }
     return {
       checkedAll,
+      submitLoading,
       checkboxGroup,
+      goodsAddPrice,
       ...toRefs(state),
       onSubmit,
       checkAll,

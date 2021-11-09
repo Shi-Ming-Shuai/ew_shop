@@ -39,6 +39,16 @@ const routes = [
     name: 'Login',
     meta: { requiresAuth: false },
     component: () => import('@/views/profile/childCpn/Login')
+  }, {
+    path: '/address',
+    name: 'Address',
+    meta: { requiresAuth: true },
+    component: () => import('@/views/profile/childCpn/Address')
+  }, {
+    path: '/addressedit',
+    name: 'Addressedit',
+    meta: { requiresAuth: true },
+    component: () => import('@/views/profile/childCpn/AddressEdit')
   }
 ]
 
@@ -48,7 +58,6 @@ const router = createRouter({
 })
 
 // 导航守卫 权限验证
-console.log(store)
 router.beforeEach((to, from, next) => {
   // 进入页面判断是否需要登录
   const isRequiresAuth = to.meta.requiresAuth

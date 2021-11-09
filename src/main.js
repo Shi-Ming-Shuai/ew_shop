@@ -7,7 +7,7 @@ import store from './store'
 import 'lib-flexible/flexible'
 
 // vant
-import { Stepper, SubmitBar, Form, Checkbox, CheckboxGroup, Field, Sidebar, Cell, CellGroup, Tag, Card, SidebarItem, Collapse, CollapseItem, List, Badge, Lazyload, Tab, Tabs, Button, Tabbar, TabbarItem, Icon, NavBar, Swipe, SwipeItem } from 'vant'
+import { AddressEdit, Stepper, SubmitBar, Form, Checkbox, CheckboxGroup, Field, Sidebar, Cell, CellGroup, Tag, Card, SidebarItem, Collapse, CollapseItem, List, Badge, Lazyload, Tab, Tabs, Button, Tabbar, TabbarItem, Icon, NavBar, Swipe, SwipeItem } from 'vant'
 
 const app = createApp(App)
 
@@ -18,6 +18,6 @@ app.use(Button).use(Tabbar).use(TabbarItem).use(Icon).use(NavBar)
   .use(Badge).use(Collapse).use(CollapseItem)
   .use(Sidebar).use(SidebarItem).use(Card).use(Tag)
   .use(Cell).use(CellGroup).use(Form).use(Field).use(Checkbox)
-  .use(CheckboxGroup).use(Stepper).use(SubmitBar)
+  .use(CheckboxGroup).use(Stepper).use(SubmitBar).use(AddressEdit)
 // .mount('#app') 写在最后 要不然 不能再 App.vue组件中 使用 vant (TabBar)
 app.use(store).use(router).mount('#app')
